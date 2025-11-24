@@ -2,28 +2,28 @@ import { Rocket, Github, Twitter, Linkedin } from "lucide-react";
 
 const footerLinks = [
   {
-    title: 'Company',
+    title: "Company",
     links: [
-      { href: '/about', label: 'About Us' },
-      { href: '/careers', label: 'Careers' },
-      { href: '/blog', label: 'Blog' },
+      { href: "/about", label: "About Us" },
+      { href: "/careers", label: "Careers" },
+      { href: "/blog", label: "Blog" },
     ],
   },
   {
-    title: 'Services',
+    title: "Services",
     links: [
-      { href: '/services/web-development', label: 'Web Development' },
-      { href: '/services/mobile-development', label: 'Mobile Development' },
-      { href: '/services/cloud-solutions', label: 'Cloud Solutions' },
-      { href: '/services/ai-ml', label: 'AI & ML' },
+      { href: "/services/web-development", label: "Web Development" },
+      { href: "/services/mobile-development", label: "Mobile Development" },
+      { href: "/services/cloud-solutions", label: "Cloud Solutions" },
+      { href: "/services/ai-ml", label: "AI & ML" },
     ],
   },
 ];
 
 const socialLinks = [
-  { name: 'GitHub', href: '#', icon: Github },
-  { name: 'Twitter', href: '#', icon: Twitter },
-  { name: 'LinkedIn', href: '#', icon: Linkedin },
+  { name: "GitHub", href: "#", icon: Github },
+  { name: "Twitter", href: "#", icon: Twitter },
+  { name: "LinkedIn", href: "#", icon: Linkedin },
 ];
 
 export default function Footer() {
@@ -32,7 +32,7 @@ export default function Footer() {
       {/* Decorative background */}
       <div className="absolute inset-0 bg-grid-pattern opacity-5" />
       <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-      
+
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 py-12 lg:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           {/* Logo and Description */}
@@ -49,7 +49,9 @@ export default function Footer() {
               </span>
             </a>
             <p className="max-w-md text-muted-foreground mb-6 leading-relaxed">
-              Building delightful developer experiences and scalable products. Your trusted technology partner for web, mobile, cloud, and AI solutions.
+              Building delightful developer experiences and scalable products.
+              Your trusted technology partner for web, mobile, cloud, and AI
+              solutions.
             </p>
 
             {/* Social Links */}
@@ -100,10 +102,16 @@ export default function Footer() {
               © {new Date().getFullYear()} TechCorp. All rights reserved.
             </p>
             <div className="flex gap-6 text-sm text-muted-foreground">
-              <a href="/privacy" className="hover:text-primary transition-colors duration-300">
+              <a
+                href="/privacy-policy"
+                className="hover:text-primary transition-colors duration-300"
+              >
                 Privacy Policy
               </a>
-              <a href="/terms" className="hover:text-primary transition-colors duration-300">
+              <a
+                href="/terms-of-service"
+                className="hover:text-primary transition-colors duration-300"
+              >
                 Terms of Service
               </a>
             </div>

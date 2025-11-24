@@ -11,8 +11,7 @@ const DUMMY_POSTS: PostProps[] = [
     href: "/blog/future-of-web-dev",
     description:
       "Explore the upcoming trends in web development, from AI-driven UI generation to the rise of serverless functions.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80",
+    imageUrl: "/blog/card1.jpg",
     date: "November 10, 2025",
   },
   {
@@ -21,8 +20,7 @@ const DUMMY_POSTS: PostProps[] = [
     href: "/blog/why-react",
     description:
       "A deep dive into the technical and business reasons why React remains our top choice for building scalable applications.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1542393545-10f5cde2c810?w=800&q=80",
+    imageUrl: "/blog/card2.jpg",
     date: "November 3, 2025",
   },
   {
@@ -31,8 +29,7 @@ const DUMMY_POSTS: PostProps[] = [
     href: "/blog/mastering-devops",
     description:
       "Learn how to build, test, and deploy your applications faster and more reliably with a robust CI/CD pipeline.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&q=80",
+    imageUrl: "/blog/card3.jpg",
     date: "October 28, 2025",
   },
   // Add more dummy posts as needed

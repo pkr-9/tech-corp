@@ -1,5 +1,6 @@
 import { Button } from "./ui/button";
 import { CheckCircle2, Sparkles } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const features = [
   "Expert team with 10+ years of experience",
@@ -24,12 +25,11 @@ export default function AboutSection() {
               {/* Main image container with 3D effect */}
               <div className="relative rounded-3xl overflow-hidden shadow-3d group-hover:shadow-glow transition-all duration-500 group-hover:-translate-y-2 group-hover:rotate-1">
                 <img
-                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1000&h=800&fit=crop"
+                  src="homepageAbout.jpg"
                   alt="Team collaborating on a project"
                   className="w-full h-auto rounded-3xl transform transition-transform duration-700 group-hover:scale-105"
                 />
                 {/* Overlay gradient */}
-                {/* [CHANGED] Swapped accent to secondary for a blue/cyan gradient */}
                 <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-transparent to-secondary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
 
@@ -100,15 +100,17 @@ export default function AboutSection() {
             </ul>
 
             {/* CTA Button */}
-            <Button
-              size="lg"
-              className="group bg-gradient-to-r from-primary to-primary-deep hover:from-primary-deep hover:to-primary text-primary-foreground shadow-3d hover:shadow-glow transition-all duration-300 hover:scale-105"
-            >
-              <span className="flex items-center gap-2">
-                Learn More About Us
-                <CheckCircle2 className="w-4 h-4 group-hover:scale-110 transition-transform" />
-              </span>
-            </Button>
+            <Link to="/about">
+              <Button
+                size="lg"
+                className="group bg-gradient-to-r from-primary to-primary-deep hover:from-primary-deep hover:to-primary text-primary-foreground shadow-3d hover:shadow-glow transition-all duration-300 hover:scale-105"
+              >
+                <span className="flex items-center gap-2">
+                  Learn More About Us
+                  <CheckCircle2 className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                </span>
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

@@ -13,7 +13,7 @@ export default function PageHeader({
   children,
 }: PageHeaderProps) {
   return (
-    <section className="relative bg-[var(--gradient-dark)] py-11 sm:py-18 overflow-hidden">
+    <section className="relative bg-[var(--gradient-dark)] py-11 sm:py-12 overflow-hidden">
       {/* Decorative background elements */}
       <div
         className="absolute inset-0 bg-grid-pattern opacity-10"

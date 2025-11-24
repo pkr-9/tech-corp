@@ -93,18 +93,22 @@ export default function ServicesPage() {
           </div>
         </PageHeader>
 
-        <BrowseByCategory />
-        <BrowseByIndustry />
+        {/* <BrowseByCategory /> */}
         <FeaturedServicesCarousel />
+        <BrowseByIndustry />
         {/* This section will hold your filter bar (Item 2) and service grid (Item 5) */}
-        <section className="py-24">
+        <section className="py-10">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             {/* Item 2: Filter Bar (Placeholder) */}
-            <div className="mb-12 p-6 bg-card rounded-2xl border border-border shadow-soft">
-              <h3 className="text-xl font-semibold text-center text-muted-foreground">
-                Filter & Sort Controls (Coming Soon)
-              </h3>
-              {/* You would add your search, dropdowns, and chips here */}
+            {/* Section Header */}
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">
+                Browse by Category
+              </h2>
+              <p className="text-lg text-muted-foreground">
+                Find the exact solution you need by exploring our core service
+                categories.
+              </p>
             </div>
 
             {/* Item 5: Services Grid */}

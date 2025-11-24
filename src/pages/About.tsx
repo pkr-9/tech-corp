@@ -1,9 +1,11 @@
 import Navbar from "@/components/Navbar";
 import PageHeader from "@/components/PageHeader";
 import Footer from "@/components/Footer";
-import AboutSection from "@/components/AboutSection";
+// import AboutSection from "@/components/AboutSection";
 import Achievements from "@/components/Achievements";
 import Certifications from "@/components/Certifications";
+import TeamSection from "@/components/TeamSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
 
 export default function AboutPage() {
   return (
@@ -20,10 +22,7 @@ export default function AboutPage() {
           For a real 'About' page, you might create new, more
           detailed components, but reusing is efficient.
         */}
-        <div className="py-24">
-          {/* This is a placeholder for your main page content.
-            For example, you could put a "Our Mission" section here.
-          */}
+        {/* <div className="py-24">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <h2 className="text-3xl font-bold text-center mb-12">
               Our Mission & Values
@@ -34,10 +33,12 @@ export default function AboutPage() {
               homepage below.)
             </p>
           </div>
-        </div>
+        </div> */}
 
         {/* You can reuse other homepage sections as needed */}
+        <TeamSection />
         <Achievements />
+        <TestimonialsSection />
         <Certifications />
       </main>
       <Footer />

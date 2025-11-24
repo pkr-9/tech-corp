@@ -9,8 +9,7 @@ const industries = [
     description:
       "Secure, scalable, and compliant financial technology solutions.",
     serviceCount: 5,
-    imageUrl:
-      "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600&q=80",
+    imageUrl: "FinTech.jpg",
   },
   {
     title: "Healthcare",
@@ -18,8 +17,7 @@ const industries = [
     description:
       "HIPAA-compliant applications for patient care and data management.",
     serviceCount: 4,
-    imageUrl:
-      "https://images.unsplash.com/photo-1538392102528-6a9c30f41c5a?w=600&q=80",
+    imageUrl: "Healthcare.jpg",
   },
   {
     title: "SaaS",
@@ -27,8 +25,7 @@ const industries = [
     description:
       "Build, launch, and scale your subscription-based software products.",
     serviceCount: 6,
-    imageUrl:
-      "https://images.unsplash.com/photo-1556742502-0d0c2e63a40b?w=600&q=80",
+    imageUrl: "SaaS.jpg",
   },
 ];
 

@@ -36,10 +36,10 @@ const featuredServices: FeaturedServiceProps[] = [
 
 export default function FeaturedServicesCarousel() {
   return (
-    <section className="py-24 bg-background">
+    <section className="py-14 bg-background">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-12">
           <div className="inline-block px-4 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-semibold mb-4">
             TOP-TIER SOLUTIONS
           </div>
