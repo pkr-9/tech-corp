@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Navbar from "@/components/Navbar";
+import Header from "@/components/Header";
 import PageHeader from "@/components/PageHeader";
 import Footer from "@/components/Footer";
 import CaseStudyCard, { CaseStudyProps } from "@/components/CaseStudyCard";
@@ -65,7 +65,7 @@ export default function CaseStudiesPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      <Header />
       <PageHeader
         title="Case Studies"
         subtitle="Explore how we've helped businesses transform challenges into success stories through technology."

@@ -1,4 +1,4 @@
-import Navbar from "@/components/Navbar";
+import Header from "@/components/Header";
 import PageHeader from "@/components/PageHeader";
 import Footer from "@/components/Footer";
 // import AboutSection from "@/components/AboutSection";
@@ -10,7 +10,7 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      <Header />
       <main>
         {/* Here is the new component in action */}
         <PageHeader

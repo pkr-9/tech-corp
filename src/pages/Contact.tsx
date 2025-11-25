@@ -1,4 +1,4 @@
-import Navbar from "@/components/Navbar";
+import Header from "@/components/Header";
 import PageHeader from "@/components/PageHeader";
 import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
@@ -7,7 +7,7 @@ import ContactDetailsMap from "@/components/ContactDetailsMap";
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      <Header />
       <main>
         {/* Reusable Page Header */}
         <PageHeader

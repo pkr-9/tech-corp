@@ -1,254 +1,367 @@
+// src/components/Hero.tsx
+import React, { useState, useCallback, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "./ui/button";
 
-export default function Hero() {
+/**
+ * Accessible hero with tabbed interactive mock preview.
+ * Tabs: "dashboard", "architecture", "code"
+ */
+const TABS = ["dashboard", "architecture", "code"] as const;
+type TabKey = (typeof TABS)[number];
+
+export default function Hero(): JSX.Element {
+  const [active, setActive] = useState<TabKey>("dashboard");
+  const tabListRef = useRef<HTMLDivElement | null>(null);
+
+  // keyboard navigation for tabs (Left/Right/Home/End)
+  const onKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      const idx = TABS.indexOf(active);
+      if (e.key === "ArrowRight") {
+        const next = TABS[(idx + 1) % TABS.length];
+        setActive(next);
+        e.preventDefault();
+      } else if (e.key === "ArrowLeft") {
+        const prev = TABS[(idx - 1 + TABS.length) % TABS.length];
+        setActive(prev);
+        e.preventDefault();
+      } else if (e.key === "Home") {
+        setActive(TABS[0]);
+        e.preventDefault();
+      } else if (e.key === "End") {
+        setActive(TABS[TABS.length - 1]);
+        e.preventDefault();
+      }
+    },
+    [active]
+  );
+
   return (
-    <section className="relative min-h-[calc(100vh-5rem)] overflow-hidden bg-gradient-to-br from-background via-primary/5 to-accent/10">
-      {/* Animated gradient orbs */}
-      <div className="absolute inset-0 overflow-hidden">
+    <section
+      aria-label="Hero"
+      className="relative min-h-[calc(100vh-5rem)] flex items-center overflow-hidden bg-background"
+    >
+      {/* decorative blurred blobs */}
+      <div className="absolute inset-0 pointer-events-none">
         <div
-          className="absolute -top-1/2 -left-1/4 w-96 h-96 bg-primary/30 rounded-full blur-3xl animate-pulse"
-          style={{ animationDuration: "4s" }}
+          className="absolute -left-24 -top-24 w-96 h-96 rounded-full blur-3xl"
+          style={{
+            background:
+              "linear-gradient(135deg, rgba(59,130,246,0.12), rgba(168,85,247,0.08))",
+          }}
         />
         <div
-          className="absolute top-1/4 -right-1/4 w-96 h-96 bg-accent/30 rounded-full blur-3xl animate-pulse"
-          style={{ animationDuration: "6s", animationDelay: "1s" }}
-        />
-        <div
-          className="absolute -bottom-1/4 left-1/3 w-96 h-96 bg-secondary/30 rounded-full blur-3xl animate-pulse"
-          style={{ animationDuration: "5s", animationDelay: "2s" }}
+          className="absolute -right-24 -bottom-12 w-96 h-96 rounded-full blur-3xl"
+          style={{
+            background:
+              "linear-gradient(135deg, rgba(56,189,248,0.08), rgba(34,197,94,0.07))",
+          }}
         />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 py-16 sm:py-18">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Column 1: Text Content (Same as before) */}
+          {/* Left: text & CTAs */}
           <div className="text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 backdrop-blur-sm border border-primary/20 mb-8 animate-fade-in shadow-soft">
-              <Sparkles className="w-4 h-4 text-primary animate-pulse" />
-              <span className="text-sm font-medium text-primary">
-                Next-Generation Software Solutions
+            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary mb-6 shadow-soft">
+              <Sparkles className="w-4 h-4 text-primary" />
+              <span className="text-sm font-medium">
+                Industry-grade engineering
               </span>
             </div>
 
-            <h1
-              className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight mb-6 animate-fade-in"
-              style={{ animationDelay: "0.1s" }}
-            >
-              <span className="block text-foreground mb-2">
-                Build, Launch, and
-              </span>
-              <span className="block bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent animate-gradient">
-                Scale Your Vision
-              </span>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground leading-tight mb-6">
+              Build{" "}
+              <span className="bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
+                scalable
+              </span>{" "}
+              products with
+              <br />a team that ships.
             </h1>
 
-            <p
-              className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto lg:mx-0 mb-10 leading-relaxed animate-fade-in"
-              style={{ animationDelay: "0.2s" }}
-            >
-              We are your end-to-end technology partner, providing expert-led
-              services in web, mobile, cloud, and AI to turn your ideas into
-              reality.
+            <p className="max-w-2xl text-lg text-muted-foreground mb-8">
+              We design, develop, and operate resilient web & cloud systems —
+              from prototypes to enterprise-grade platforms. Fast delivery,
+              pragmatic architecture, measurable outcomes.
             </p>
 
-            <div
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center animate-fade-in"
-              style={{ animationDelay: "0.3s" }}
-            >
-              <Link to="/services">
-                <Button
-                  size="lg"
-                  className="group relative overflow-hidden bg-gradient-to-r from-primary to-primary-deep hover:from-primary-deep hover:to-primary text-primary-foreground shadow-3d hover:shadow-glow transition-all duration-300 hover:scale-105 hover:-translate-y-1"
-                >
-                  <span className="relative z-10 flex items-center gap-2">
-                    Our Services
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary-glow to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="flex flex-col sm:flex-row items-center gap-3">
+              <Link to="/contact" className="w-full sm:w-auto">
+                <Button className="inline-flex items-center gap-2 bg-primary text-primary-foreground shadow-3d hover:shadow-glow">
+                  Start your project
+                  <ArrowRight className="w-4 h-4" />
                 </Button>
               </Link>
 
-              <Link to="/contact">
+              <Link to="/services" className="w-full sm:w-auto">
                 <Button
-                  size="lg"
-                  variant="outline"
-                  className="group border-2 border-primary/30 bg-background/50 backdrop-blur-sm hover:bg-primary/10 hover:border-primary hover:shadow-glow transition-all duration-300 hover:scale-105 hover:-translate-y-1"
+                  variant="ghost"
+                  className="inline-flex items-center gap-2"
                 >
-                  <span className="flex items-center gap-2 text-primary">
-                    Get in Touch
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </span>
+                  Explore services
                 </Button>
               </Link>
+            </div>
+
+            <div className="flex flex-wrap gap-6 mt-8 text-sm text-muted-foreground">
+              <div className="flex items-center gap-2">
+                <strong className="text-foreground">500+</strong>
+                <span>happy clients</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <strong className="text-foreground">10+</strong>
+                <span>years in business</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <strong className="text-foreground">1200+</strong>
+                <span>projects delivered</span>
+              </div>
             </div>
           </div>
 
-          {/* Column 2: Single Code Window with Contact Info */}
-          <div
-            className="relative animate-fade-in"
-            style={{ animationDelay: "0.4s" }}
-          >
-            <div
-              className="relative animate-float"
-              style={{ animationDuration: "6s" }}
-            >
-              <div className="relative rounded-xl border border-border/50 bg-card/50 shadow-3d backdrop-blur-sm transition-all duration-300 hover:shadow-glow hover:-translate-y-1 overflow-hidden">
-                {/* Window Header */}
-                <div className="px-4 py-3 border-b border-border/50 flex items-center gap-2 bg-muted/30">
-                  <div className="w-3 h-3 rounded-full bg-red-500/50" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
-                  <div className="w-3 h-3 rounded-full bg-green-500/50" />
-                  <span className="ml-2 text-xs text-muted-foreground font-mono opacity-50">
-                    config.ts
-                  </span>
+          {/* Right: Interactive mock + testimonial + logos */}
+          <div className="order-first lg:order-last">
+            <div className="mx-auto max-w-md lg:max-w-lg space-y-6">
+              {/* Tabbed mockup card */}
+              <div className="rounded-3xl bg-card border border-border p-4 shadow-3d">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-2">
+                    <span className="h-2 w-8 rounded-full bg-muted" />
+                    <span className="h-2 w-8 rounded-full bg-muted/60" />
+                    <span className="h-2 w-8 rounded-full bg-muted/40" />
+                  </div>
+
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs">
+                    Live demo
+                  </div>
                 </div>
 
-                {/* Combined Code Content */}
-                <div className="p-5 bg-foreground/5 overflow-x-auto">
-                  <pre className="code-block font-mono text-sm text-foreground/80 leading-relaxed">
-                    <code className="animate-typing">
-                      {/* Block 1: Vision */}
-                      <span className="line">
-                        <span className="text-primary">const</span> vision ={" "}
-                        {"{"}
-                      </span>
-                      <span className="line">
-                        {"  "}name:{" "}
-                        <span className="text-secondary">
-                          'Project Phoenix'
-                        </span>
-                        ,
-                      </span>
-                      <span className="line">
-                        {"  "}status:{" "}
-                        <span className="text-secondary">'launching'</span>,
-                      </span>
-                      <span className="line">
-                        {"  "}scalable:{" "}
-                        <span className="text-accent">true</span>
-                      </span>
-                      <span className="line">{"}"};</span>
+                {/* Tab buttons */}
+                <div
+                  ref={tabListRef}
+                  role="tablist"
+                  aria-label="Preview tabs"
+                  className="flex gap-2 mb-3"
+                  onKeyDown={onKeyDown}
+                >
+                  <button
+                    role="tab"
+                    id="tab-dashboard"
+                    aria-controls="panel-dashboard"
+                    aria-selected={active === "dashboard"}
+                    tabIndex={active === "dashboard" ? 0 : -1}
+                    onClick={() => setActive("dashboard")}
+                    className={`flex-1 text-xs font-medium py-2 rounded-lg transition ${
+                      active === "dashboard"
+                        ? "bg-primary/8"
+                        : "bg-transparent hover:bg-muted/8"
+                    }`}
+                  >
+                    Dashboard
+                  </button>
 
-                      {/* Spacer */}
-                      <span className="line h-4 block"></span>
+                  <button
+                    role="tab"
+                    id="tab-architecture"
+                    aria-controls="panel-architecture"
+                    aria-selected={active === "architecture"}
+                    tabIndex={active === "architecture" ? 0 : -1}
+                    onClick={() => setActive("architecture")}
+                    className={`flex-1 text-xs font-medium py-2 rounded-lg transition ${
+                      active === "architecture"
+                        ? "bg-primary/8"
+                        : "bg-transparent hover:bg-muted/8"
+                    }`}
+                  >
+                    Architecture
+                  </button>
 
-                      {/* Block 2: Contact (Interactive) */}
-                      <span className="line">
-                        <span className="text-primary">const</span> fastContact
-                        = {"{"}
-                      </span>
-                      <span className="line">
-                        {"  "}phone:{" "}
-                        <a
-                          href="tel:+915551234567"
-                          className="text-secondary hover:underline hover:text-primary transition-colors cursor-pointer font-bold"
+                  <button
+                    role="tab"
+                    id="tab-code"
+                    aria-controls="panel-code"
+                    aria-selected={active === "code"}
+                    tabIndex={active === "code" ? 0 : -1}
+                    onClick={() => setActive("code")}
+                    className={`flex-1 text-xs font-medium py-2 rounded-lg transition ${
+                      active === "code"
+                        ? "bg-primary/8"
+                        : "bg-transparent hover:bg-muted/8"
+                    }`}
+                  >
+                    Code
+                  </button>
+                </div>
+
+                {/* Panels */}
+                <div className="rounded-xl bg-gradient-to-br from-white/2 to-muted/2 p-4 min-h-[220px]">
+                  {/* Dashboard panel */}
+                  <div
+                    id="panel-dashboard"
+                    role="tabpanel"
+                    aria-labelledby="tab-dashboard"
+                    aria-hidden={active !== "dashboard"}
+                    className={
+                      active === "dashboard" ? "block space-y-3" : "hidden"
+                    }
+                  >
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <div className="h-3 w-36 rounded-full bg-muted" />
+                        <div className="h-3 w-20 rounded-full bg-muted/70 mt-2" />
+                      </div>
+                      <div className="text-right">
+                        <div className="text-sm text-muted-foreground">
+                          Active
+                        </div>
+                        <div className="text-lg font-semibold text-foreground">
+                          1.2M
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mt-3 flex items-end gap-3">
+                      <div className="flex-1 h-28 bg-primary/60 rounded-sm" />
+                      <div className="flex-1 h-16 bg-primary/40 rounded-sm" />
+                      <div className="flex-1 h-24 bg-primary/30 rounded-sm" />
+                      <div className="flex-1 h-10 bg-primary/20 rounded-sm" />
+                      <div className="flex-1 h-14 bg-primary/10 rounded-sm" />
+                    </div>
+
+                    <div className="mt-4 flex items-center justify-between text-sm text-muted-foreground">
+                      <div>Uptime 99.99%</div>
+                      <div>Avg latency 42ms</div>
+                    </div>
+                  </div>
+
+                  {/* Architecture panel */}
+                  <div
+                    id="panel-architecture"
+                    role="tabpanel"
+                    aria-labelledby="tab-architecture"
+                    aria-hidden={active !== "architecture"}
+                    className={
+                      active === "architecture" ? "block space-y-3" : "hidden"
+                    }
+                  >
+                    <div className="flex gap-3 items-center">
+                      <div className="p-3 rounded-lg bg-muted/8">
+                        <svg
+                          width="48"
+                          height="36"
+                          viewBox="0 0 48 36"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          aria-hidden
                         >
-                          '+91 (555) 123-4567'
-                        </a>
-                        ,
-                      </span>
-                      <span className="line">
-                        {"  "}email:{" "}
-                        <a
-                          href="mailto:hello@techcorp.com"
-                          className="text-accent hover:underline hover:text-primary transition-colors cursor-pointer font-bold"
-                        >
-                          'hello@techcorp.com'
-                        </a>
-                      </span>
-                      <span className="line">{"}"};</span>
-                    </code>
-                  </pre>
+                          <rect
+                            x="2"
+                            y="6"
+                            width="16"
+                            height="10"
+                            rx="2"
+                            fill="rgba(59,130,246,0.12)"
+                          />
+                          <rect
+                            x="30"
+                            y="6"
+                            width="16"
+                            height="10"
+                            rx="2"
+                            fill="rgba(16,185,129,0.1)"
+                          />
+                          <rect
+                            x="16"
+                            y="22"
+                            width="16"
+                            height="10"
+                            rx="2"
+                            fill="rgba(168,85,247,0.08)"
+                          />
+                        </svg>
+                      </div>
+                      <div>
+                        <div className="h-3 w-28 rounded-full bg-muted" />
+                        <div className="h-3 w-20 rounded-full bg-muted/70 mt-2" />
+                        <div className="text-sm text-muted-foreground mt-2">
+                          Microservices • Event-driven • Auto-scaling
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mt-2 grid grid-cols-2 gap-2">
+                      <div className="p-3 rounded-lg bg-white/3 border border-border">
+                        <div className="h-3 w-20 rounded-full bg-muted mb-2" />
+                        <div className="h-3 w-12 rounded-full bg-muted/70" />
+                      </div>
+                      <div className="p-3 rounded-lg bg-white/3 border border-border">
+                        <div className="h-3 w-20 rounded-full bg-muted mb-2" />
+                        <div className="h-3 w-12 rounded-full bg-muted/70" />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Code panel */}
+                  <div
+                    id="panel-code"
+                    role="tabpanel"
+                    aria-labelledby="tab-code"
+                    aria-hidden={active !== "code"}
+                    className={active === "code" ? "block space-y-3" : "hidden"}
+                  >
+                    <div className="rounded-md bg-[#0b1221] p-3 text-xs font-mono text-green-300">
+                      <div>const server = createServer({/* ... */});</div>
+                      <div>await deploy(server).to('prod');</div>
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      Well-documented APIs • CI/CD • Observability
+                    </div>
+                  </div>
                 </div>
               </div>
+
+              {/* Testimonial card */}
+              <div className="rounded-2xl bg-card border border-border p-4 shadow-soft">
+                <div className="flex items-start gap-3">
+                  <div className="h-10 w-10 rounded-full bg-muted flex items-center justify-center text-sm text-foreground font-semibold">
+                    P
+                  </div>
+                  <div>
+                    <p className="text-sm text-foreground">
+                      "TechCorp helped us stabilise a mission-critical service
+                      and cut costs by 32% in three months."
+                    </p>
+                    <div className="mt-2 text-xs text-muted-foreground">
+                      — Priya Rao, CTO @ FinEdge
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Client logos (compact placeholders) */}
+              {/* <div className="flex items-center justify-between gap-3 text-muted-foreground">
+                <div className="h-6 w-20 bg-muted/10 rounded-md flex items-center justify-center text-xs">
+                  Acme
+                </div>
+                <div className="h-6 w-20 bg-muted/10 rounded-md flex items-center justify-center text-xs">
+                  Nova
+                </div>
+                <div className="h-6 w-20 bg-muted/10 rounded-md flex items-center justify-center text-xs">
+                  Pulse
+                </div>
+              </div> */}
             </div>
           </div>
         </div>
       </div>
 
-      {/* Bottom wave separator */}
-      <div className="absolute bottom-0 left-0 right-0">
-        <svg
-          className="w-full h-16 sm:h-24 text-background"
-          viewBox="0 0 1440 120"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M0,64 C360,96 720,96 1080,64 C1440,32 1440,32 1440,96 L1440,120 L0,120 Z"
-            fill="currentColor"
-          />
-        </svg>
-      </div>
-
+      {/* small scoped styles that use tokens already present in repo */}
       <style>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0px) translateX(0px); }
-          33% { transform: translateY(-20px) translateX(10px); }
-          66% { transform: translateY(-10px) translateX(-10px); }
-        }
-        
-        @keyframes gradient {
-          0%, 100% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-        }
-        
-        .animate-float { animation: float 6s ease-in-out infinite; }
-        .animate-gradient { background-size: 200% 200%; animation: gradient 3s ease infinite; }
-        .shadow-glow { box-shadow: 0 0 40px currentColor; }
-        .shadow-3d { box-shadow: 0 20px 60px -15px hsl(var(--primary) / 0.3), 0 10px 20px -10px hsl(var(--primary) / 0.2); }
-        
-        @keyframes fade-in {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in { animation: fade-in 0.8s ease-out forwards; opacity: 0; }
-
-        /* Typing Animation Logic */
-        .code-block .line {
-          display: block;
-          white-space: pre;
-          overflow: hidden;
-          width: 0;
-          animation: typing-line 0.5s steps(30, end) forwards;
-        }
-        
-        /* Staggered Delays for all 10 lines */
-        .code-block .line:nth-child(1) { animation-delay: 0.5s; }
-        .code-block .line:nth-child(2) { animation-delay: 1.0s; }
-        .code-block .line:nth-child(3) { animation-delay: 1.5s; }
-        .code-block .line:nth-child(4) { animation-delay: 2.0s; }
-        .code-block .line:nth-child(5) { animation-delay: 2.5s; }
-        /* Spacer at 6 */
-        .code-block .line:nth-child(6) { animation-delay: 3.0s; } 
-        /* Contact Block Starts */
-        .code-block .line:nth-child(7) { animation-delay: 3.5s; }
-        .code-block .line:nth-child(8) { animation-delay: 4.0s; }
-        .code-block .line:nth-child(9) { animation-delay: 4.5s; }
-        .code-block .line:nth-child(10) { animation-delay: 5.0s; }
-
-        .animate-typing { position: relative; }
-        
-        /* Blinking caret on the last line */
-        .animate-typing .line:last-child:after {
-          content: '|';
-          animation: blink-caret 1s step-end infinite;
-          animation-delay: 5.5s;
-          color: hsl(var(--accent));
-        }
-
-        @keyframes typing-line {
-          from { width: 0; }
-          to { width: 100%; }
-        }
-
-        @keyframes blink-caret {
-          from, to { opacity: 1; }
-          50% { opacity: 0; }
-        }
+        .shadow-3d { box-shadow: var(--shadow-3d); }
+        .shadow-glow { box-shadow: var(--shadow-glow); }
+        .shadow-soft { box-shadow: var(--shadow-soft); }
       `}</style>
     </section>
   );

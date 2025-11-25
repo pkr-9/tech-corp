@@ -1,4 +1,4 @@
-import Navbar from "@/components/Navbar";
+import Header from "@/components/Header";
 import PageHeader from "@/components/PageHeader";
 import Footer from "@/components/Footer";
 import BlogPostCard, { PostProps } from "@/components/BlogPostCard";
@@ -38,7 +38,7 @@ const DUMMY_POSTS: PostProps[] = [
 export default function BlogPage() {
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      <Header />
       <main>
         {/* Reusable Page Header */}
         <PageHeader

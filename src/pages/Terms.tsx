@@ -1,11 +1,11 @@
-import Navbar from "@/components/Navbar";
+import Header from "@/components/Header";
 import PageHeader from "@/components/PageHeader";
 import Footer from "@/components/Footer";
 
 export default function TermsPage() {
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      <Header />
       <PageHeader
         title="Terms of Service"
         subtitle="Last updated: November 24, 2025"

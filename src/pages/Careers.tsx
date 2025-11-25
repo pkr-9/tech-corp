@@ -7,7 +7,7 @@ import {
   Coffee,
   GraduationCap,
 } from "lucide-react";
-import Navbar from "@/components/Navbar";
+import Header from "@/components/Header";
 import PageHeader from "@/components/PageHeader";
 import Footer from "@/components/Footer";
 import JobListingCard, { JobProps } from "@/components/JobListingCard";
@@ -97,7 +97,7 @@ export default function CareersPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      <Header />
       <PageHeader
         title="Join the Team"
         subtitle="Help us build the future of software. We're looking for passionate individuals to solve hard problems."

@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import Navbar from "@/components/Navbar";
+import Header from "@/components/Header";
 import PageHeader from "@/components/PageHeader";
 import Footer from "@/components/Footer";
 
@@ -49,7 +49,7 @@ export default function BlogPostDetailPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      <Header />
       <main>
         {/* Reusable Page Header, using the post title */}
         <PageHeader title={post.title}>

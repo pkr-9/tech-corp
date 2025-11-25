@@ -10,7 +10,7 @@ import {
   Layout,
   Terminal,
 } from "lucide-react";
-import Navbar from "@/components/Navbar";
+import Header from "@/components/Header";
 import PageHeader from "@/components/PageHeader";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -33,7 +33,21 @@ const SERVICE_DATA: Record<string, any> = {
       "API Development & Integration",
       "Performance Optimization & SEO",
     ],
-    techStack: ["React", "TypeScript", "Next.js", "Tailwind CSS", "Node.js"],
+    techStack: [
+      "React",
+      "TypeScript",
+      "Next.js",
+      "Tailwind CSS",
+      "Node.js",
+      "Vue.js",
+      "Angular",
+      "GraphQL",
+      "PostgreSQL",
+      "MongoDB",
+      "Redis",
+      "Vercel",
+      "Docker",
+    ],
   },
   "mobile-development": {
     title: "Mobile Development",
@@ -49,7 +63,20 @@ const SERVICE_DATA: Record<string, any> = {
       "Offline-first architecture",
       "Push notification integration",
     ],
-    techStack: ["React Native", "Flutter", "Swift", "Kotlin", "Firebase"],
+    techStack: [
+      "React Native",
+      "Flutter",
+      "Swift",
+      "Kotlin",
+      "Firebase",
+      "Expo",
+      "Dart",
+      "SwiftUI",
+      "Jetpack Compose",
+      "SQLite",
+      "Realm",
+      "Objective-C",
+    ],
   },
   "cloud-solutions": {
     title: "Cloud & DevOps",
@@ -65,7 +92,20 @@ const SERVICE_DATA: Record<string, any> = {
       "Docker & Kubernetes Orchestration",
       "24/7 Monitoring & Alerting",
     ],
-    techStack: ["AWS", "Azure", "Docker", "Kubernetes", "Terraform"],
+    techStack: [
+      "AWS",
+      "Azure",
+      "Google Cloud",
+      "Docker",
+      "Kubernetes",
+      "Terraform",
+      "Ansible",
+      "Jenkins",
+      "GitLab CI",
+      "Prometheus",
+      "Grafana",
+      "Linux",
+    ],
   },
   "ai-ml": {
     title: "AI & Machine Learning",
@@ -81,7 +121,20 @@ const SERVICE_DATA: Record<string, any> = {
       "Recommendation Engines",
       "Process Automation Agents",
     ],
-    techStack: ["Python", "TensorFlow", "OpenAI API", "PyTorch", "LangChain"],
+    techStack: [
+      "Python",
+      "TensorFlow",
+      "OpenAI API",
+      "PyTorch",
+      "LangChain",
+      "Scikit-learn",
+      "Pandas",
+      "Hugging Face",
+      "Keras",
+      "Apache Spark",
+      "Jupyter",
+      "MLOps",
+    ],
   },
   "qa-testing": {
     title: "QA & Testing",
@@ -97,7 +150,20 @@ const SERVICE_DATA: Record<string, any> = {
       "Mobile App Compatibility Testing",
       "API Testing Automation",
     ],
-    techStack: ["Selenium", "Cypress", "Jest", "Postman", "JMeter"],
+    techStack: [
+      "Selenium",
+      "Cypress",
+      "Jest",
+      "Postman",
+      "JMeter",
+      "Playwright",
+      "Appium",
+      "JUnit",
+      "TestRail",
+      "SoapUI",
+      "Cucumber",
+      "K6",
+    ],
   },
   "ux-ui-design": {
     title: "UX/UI Design",
@@ -113,7 +179,19 @@ const SERVICE_DATA: Record<string, any> = {
       "Interaction Design",
       "Accessibility (WCAG) Audits",
     ],
-    techStack: ["Figma", "Adobe XD", "Sketch", "Framer", "Storybook"],
+    techStack: [
+      "Figma",
+      "Adobe XD",
+      "Sketch",
+      "Framer",
+      "Storybook",
+      "InVision",
+      "Zeplin",
+      "Miro",
+      "Principle",
+      "Balsamiq",
+      "Webflow",
+    ],
   },
 };
 
@@ -132,7 +210,7 @@ export default function ServiceDetailPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      <Header />
 
       <main>
         {/* Header Section */}

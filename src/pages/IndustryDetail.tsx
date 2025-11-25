@@ -8,7 +8,7 @@ import {
   CheckCircle2,
   Building2,
 } from "lucide-react";
-import Navbar from "@/components/Navbar";
+import Header from "@/components/Header";
 import PageHeader from "@/components/PageHeader";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -122,7 +122,7 @@ export default function IndustryDetailPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      <Header />
 
       {/* Hero Section */}
       <div className="relative h-[50vh] min-h-[400px] w-full overflow-hidden flex items-center justify-center">

@@ -1,6 +1,6 @@
 import { useParams, Navigate, Link } from "react-router-dom";
 import { ArrowLeft, CheckCircle2, TrendingUp, Layers, Cpu } from "lucide-react";
-import Navbar from "@/components/Navbar";
+import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -119,7 +119,7 @@ export default function CaseStudyDetailPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      <Header />
 
       <main>
         {/* Hero Banner */}
