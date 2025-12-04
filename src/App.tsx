@@ -11,8 +11,8 @@ import BlogPage from "./pages/Blog";
 import BlogPostDetailPage from "./pages/BlogPostDetail";
 import ServicesPage from "./pages/Services";
 import ServiceDetailPage from "./pages/ServiceDetail";
-import CaseStudiesPage from "./pages/CaseStudies";
-import CaseStudyDetailPage from "./pages/CaseStudyDetail";
+// import CaseStudiesPage from "./pages/CaseStudies";
+// import CaseStudyDetailPage from "./pages/CaseStudyDetail";
 import CareersPage from "./pages/Careers";
 import PrivacyPage from "./pages/Privacy";
 import TermsPage from "./pages/Terms";
@@ -39,8 +39,8 @@ const App = () => (
             path="/services/:serviceSlug"
             element={<ServiceDetailPage />}
           />
-          <Route path="/case-studies" element={<CaseStudiesPage />} />
-          <Route path="/case-studies/:id" element={<CaseStudyDetailPage />} />
+          {/* <Route path="/case-studies" element={<CaseStudiesPage />} />
+          <Route path="/case-studies/:id" element={<CaseStudyDetailPage />} /> */}
           <Route path="/careers" element={<CareersPage />} />
           <Route path="/privacy-policy" element={<PrivacyPage />} />
           <Route path="/terms-of-service" element={<TermsPage />} />

@@ -183,7 +183,7 @@ export default function IndustryDetailPage() {
               </section>
 
               {/* Stats Section */}
-              <section className="bg-primary/5 rounded-3xl p-8 border border-primary/10">
+              {/* <section className="bg-primary/5 rounded-3xl p-8 border border-primary/10">
                 <div className="grid grid-cols-2 gap-8 text-center">
                   {industry.stats.map((stat: any, idx: number) => (
                     <div key={idx}>
@@ -196,7 +196,7 @@ export default function IndustryDetailPage() {
                     </div>
                   ))}
                 </div>
-              </section>
+              </section> */}
             </div>
 
             {/* Sidebar */}

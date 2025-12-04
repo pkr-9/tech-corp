@@ -1,28 +1,28 @@
-import { Users, GitBranch, ShieldCheck, Award } from "lucide-react";
+import { Zap, Code2, Clock, Award } from "lucide-react";
 
 const stats = [
   {
-    icon: Users,
-    label: "Happy Clients",
-    value: "500+",
+    icon: Code2,
+    label: "Modern Technologies",
+    value: "50+",
     color: "from-primary to-primary-deep",
   },
   {
-    icon: GitBranch,
-    label: "Projects Completed",
-    value: "1,200+",
+    icon: Clock,
+    label: "Support Availability",
+    value: "24/7",
     color: "from-secondary to-primary",
   },
   {
-    icon: ShieldCheck,
-    label: "Years in Business",
-    value: "10+",
+    icon: Zap,
+    label: "On-Time Delivery",
+    value: "100%",
     color: "from-accent to-secondary",
   },
   {
     icon: Award,
-    label: "Industry Awards",
-    value: "50+",
+    label: "Commitment to Quality", // Vague but positive
+    value: "100%",
     color: "from-primary to-accent",
   },
 ];

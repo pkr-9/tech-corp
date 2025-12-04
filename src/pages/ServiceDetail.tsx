@@ -316,7 +316,7 @@ export default function ServiceDetailPage() {
                     <ul className="space-y-3 text-sm text-muted-foreground">
                       <li className="flex items-center gap-2">
                         <CheckCircle2 className="w-4 h-4 text-primary" />
-                        <span>10+ Years Experience</span>
+                        <span>100% On-Time Delivery</span>
                       </li>
                       <li className="flex items-center gap-2">
                         <CheckCircle2 className="w-4 h-4 text-primary" />

@@ -12,31 +12,31 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 const TESTIMONIALS = [
   {
     content:
-      "TechCorp transformed our legacy infrastructure into a modern, scalable cloud powerhouse. Their team's expertise in DevOps is unmatched.",
-    author: "David Kim",
-    role: "CTO, FinStream",
-    avatar: "DK",
+      "The team's energy is infectious. They built our MVP in record time, and the code quality was better than agencies we've paid double for.",
+    author: "Michael Ross",
+    role: "Founder, QuickEats (Startup)",
+    avatar: "MR",
   },
   {
     content:
-      "The mobile app they built for us didn't just meet requirements—it exceeded our expectations in performance and user experience. 5 stars.",
-    author: "Elena Rodriguez",
-    role: "Product Manager, HealthVibe",
-    avatar: "ER",
+      "I was hesitant to work with a new agency, but their technical depth convinced me. They modernized our entire frontend workflow seamlessly.",
+    author: "Sarah L.",
+    role: "Product Owner, RetailFlow",
+    avatar: "SL",
   },
   {
     content:
-      "We were struggling with scaling our AI models. TechCorp came in, optimized our pipelines, and reduced our inference costs by 40%.",
-    author: "James Wilson",
-    role: "Director of Engineering, DataFlow",
-    avatar: "JW",
+      "They don't just write code; they act as strategic partners. They helped us define our roadmap and choose the right tech stack for scaling.",
+    author: "James Chen",
+    role: "CTO, NextLevel Ops",
+    avatar: "JC",
   },
   {
     content:
-      "Professional, agile, and transparent. They truly felt like an extension of our own team rather than an external agency.",
-    author: "Sarah Jenkins",
-    role: "CEO, StartUp Inc",
-    avatar: "SJ",
+      "Responsive, transparent, and incredibly skilled. It feels like having an in-house engineering team.",
+    author: "Anita Patel",
+    role: "Director, Civic Innovation",
+    avatar: "AP",
   },
 ];
 

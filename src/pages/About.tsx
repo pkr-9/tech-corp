@@ -1,7 +1,7 @@
 import Header from "@/components/Header";
 import PageHeader from "@/components/PageHeader";
 import Footer from "@/components/Footer";
-// import AboutSection from "@/components/AboutSection";
+import AboutSection from "@/components/AboutSection";
 import Achievements from "@/components/Achievements";
 import Certifications from "@/components/Certifications";
 import TeamSection from "@/components/TeamSection";
@@ -36,6 +36,7 @@ export default function AboutPage() {
         </div> */}
 
         {/* You can reuse other homepage sections as needed */}
+        <AboutSection />
         <TeamSection />
         <Achievements />
         <TestimonialsSection />
