@@ -6,11 +6,12 @@ import {
   Globe,
   Coffee,
   GraduationCap,
+  Briefcase,
 } from "lucide-react";
 import Header from "@/components/Header";
 import PageHeader from "@/components/PageHeader";
 import Footer from "@/components/Footer";
-import JobListingCard, { JobProps } from "@/components/JobListingCard";
+import type { JobProps } from "@/components/JobListingCard";
 import ApplicationForm from "@/components/ApplicationForm";
 import {
   Dialog,
@@ -53,44 +54,7 @@ const BENEFITS = [
   },
 ];
 
-const OPEN_POSITIONS: JobProps[] = [
-  {
-    id: "1",
-    title: "Senior React Developer",
-    department: "Engineering",
-    location: "Remote (Global)",
-    type: "Full-time",
-    description:
-      "We're looking for an experienced frontend developer to lead our core product team. You'll be architecting scalable UIs using React, TypeScript, and Tailwind.",
-  },
-  {
-    id: "2",
-    title: "DevOps Engineer",
-    department: "Infrastructure",
-    location: "Remote (US/EU)",
-    type: "Full-time",
-    description:
-      "Help us build robust CI/CD pipelines and manage our AWS infrastructure. Experience with Kubernetes, Terraform, and Docker is a must.",
-  },
-  {
-    id: "3",
-    title: "Product Designer",
-    department: "Design",
-    location: "Remote (Global)",
-    type: "Full-time",
-    description:
-      "Join our design team to craft beautiful, intuitive user experiences. You'll work closely with PMs and engineers to turn complex problems into simple flows.",
-  },
-  {
-    id: "4",
-    title: "Technical Content Writer",
-    department: "Marketing",
-    location: "Remote (Global)",
-    type: "Contract",
-    description:
-      "We need someone who can explain complex technical concepts in simple terms. You'll be writing blog posts, documentation, and white papers.",
-  },
-];
+// OPEN_POSITIONS removed — the list was unused in the current page (job listing UI is commented out)
 
 export default function CareersPage() {
   const [selectedJob, setSelectedJob] = useState<JobProps | null>(null);
@@ -136,56 +100,103 @@ export default function CareersPage() {
           </div>
         </section>
 
-        {/* Job Listings */}
-        <section className="py-24">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
-              <div>
-                <h2 className="text-3xl font-bold mb-2">Open Positions</h2>
-                <p className="text-muted-foreground">
-                  Find the role that fits you best.
-                </p>
+        {/* Open Positions - NO OPENINGS STATE */}
+        <div className="mb-16">
+          <h2
+            className="text-3xl md:text-4xl font-heading font-bold mb-8 text-center animate-slide-up"
+            style={{ animationDelay: "0.3s" }}
+          >
+            Open <span className="gradient-text">Positions</span>
+          </h2>
+          <div
+            className="flex justify-center animate-slide-up"
+            style={{ animationDelay: "0.4s" }}
+          >
+            <div className="glass-card p-10 max-w-2xl w-full text-center">
+              <div className="mb-6 inline-flex p-4 rounded-full bg-muted/50">
+                <Briefcase className="h-10 w-10 text-muted-foreground" />
               </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {OPEN_POSITIONS.map((job) => (
-                <JobListingCard
-                  key={job.id}
-                  job={job}
-                  onApply={setSelectedJob}
-                />
-              ))}
+              <h3 className="text-2xl font-semibold mb-2">
+                No Current Openings
+              </h3>
+              <p className="text-muted-foreground mb-6">
+                We don't have any open roles at the moment, but things change
+                fast here! Check back soon.
+              </p>
             </div>
           </div>
-        </section>
+        </div>
       </main>
+      {/* Job Listings */}
+      {/* <div
+          className="text-center animate-slide-up"
+          style={{ animationDelay: "0.5s" }}
+        >
+          <h3 className="text-2xl font-heading font-semibold mb-4">
+            Want to be considered for future roles?
+          </h3>
+          <p className="text-muted-foreground mb-6 max-w-lg mx-auto">
+            We're always looking for talented people. Send your resume to us and
+            we'll keep it on file.
+          </p>
+          <Button asChild size="lg" variant="outline" className="border-2">
+            <a href="mailto:info@tenderlink.tech?subject=General Career Inquiry">
+              <Mail className="h-4 w-4 mr-2" />
+              Email Your Resume
+            </a>
+          </Button>
+        </div> */}
 
-      <Footer />
-
-      {/* Application Modal */}
-      <Dialog
-        open={!!selectedJob}
-        onOpenChange={(open) => !open && setSelectedJob(null)}
-      >
-        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle>Apply for {selectedJob?.title}</DialogTitle>
-            <DialogDescription>
-              {selectedJob?.department} • {selectedJob?.location}
-            </DialogDescription>
-          </DialogHeader>
-
-          <div className="mt-4">
-            {selectedJob && (
-              <ApplicationForm
-                jobTitle={selectedJob.title}
-                onSuccess={() => setSelectedJob(null)}
-              />
-            )}
+      {/* ------------------------------------------------------------------ */}
+      {/* Open Positions */}
+      {/* <div className="mb-16">
+          <h2
+            className="text-3xl md:text-4xl font-heading font-bold mb-8 text-center animate-slide-up"
+            style={{ animationDelay: "0.3s" }}
+          >
+            Open <span className="gradient-text">Positions</span>
+          </h2>
+          <div className="space-y-4">
+            {jobOpenings.map((job, index) => (
+              <Card
+                key={index}
+                className="glass-card p-4 md:p-6 flex flex-col md:flex-row justify-between md:items-center animate-slide-up"
+                style={{ animationDelay: `${index * 0.1 + 0.4}s` }}
+              >
+                <div>
+                  <h3 className="text-xl font-semibold">{job.title}</h3>
+                  <p className="text-muted-foreground text-sm mt-1">
+                    {job.location} • {job.type}
+                  </p>
+                </div>
+                <Button asChild className="mt-4 md:mt-0 md:w-auto w-full">
+                  <a href={job.link}>Apply Now</a>
+                </Button>
+              </Card>
+            ))}
           </div>
-        </DialogContent>
-      </Dialog>
+        </div> */}
+
+      {/* No suitable position? */}
+      {/* <div
+          className="text-center animate-slide-up"
+          style={{ animationDelay: "0.8s" }}
+        >
+          <h3 className="text-2xl font-heading font-semibold mb-4">
+            Don't see a role that fits?
+          </h3>
+          <p className="text-muted-foreground mb-6 max-w-lg mx-auto">
+            We're always looking for talented people. Send your resume to us and
+            we'll keep it on file.
+          </p>
+          <Button asChild size="lg" variant="outline" className="border-2">
+            <a href="mailto:info@tenderlink.tech?subject=General Career Inquiry">
+              <Mail className="h-4 w-4 mr-2" />
+              Email Your Resume
+            </a>
+          </Button>
+        </div> */}
+      <Footer />
     </div>
   );
 }

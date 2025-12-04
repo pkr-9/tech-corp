@@ -4,8 +4,8 @@ const contactDetails = [
   {
     icon: MapPin,
     title: "Our Office",
-    info: "123 TechCorp Plaza, GIGA SPACE, Pune, India",
-    link: "https://maps.google.com", // Link to your address
+    info: "801 TechCorp Plaza, Maruti Millennium Tower, Baner, Pune, India",
+    link: "https://maps.app.goo.gl/PBooT9pJ8PrwdMPUA", // Link to the address
   },
   {
     icon: Mail,
@@ -68,8 +68,9 @@ export default function ContactDetailsMap() {
             4. Click "Embed a map"
             5. Copy the HTML and paste the 'src' URL here.
           */}
+
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15124.93922316076!2d73.9213038!3d18.599264!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c14df5c70e0d%3A0x2d19689e09e2fced!2sEON%20Free%20Zone!5e0!3m2!1sen!2sin!4v1678888888888!5m2!1sen!2sin"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1891.2415602205647!2d73.77000505104596!3d18.552245553207616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bfb299de07b7%3A0xa25f94c8aa2ef3c!2sMaruti%20Millennium%20Tower!5e0!3m2!1sen!2sin!4v1764837608825!5m2!1sen!2sin"
             width="100%"
             height="100%"
             style={{ border: 0 }}
