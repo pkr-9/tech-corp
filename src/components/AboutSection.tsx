@@ -1,25 +1,53 @@
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
-import { CheckCircle2, Sparkles, Zap, Users } from "lucide-react"; // Added Zap, Users
+import { CheckCircle2, Zap, Users } from "lucide-react";
 
 const features = [
-  "Senior engineering leadership", // Changed from "10+ years..."
+  "Senior engineering leadership",
   "Modern, scalable tech stack",
-  "Agile & transparent workflow", // Changed from "Agile development..."
+  "Agile & transparent workflow",
   "Dedicated 24/7 support",
 ];
 
 export default function AboutSection() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sectionRef.current || !imageRef.current) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      const speed = 0.15; // Parallax speed factor
+
+      // Check if section is roughly in view
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        // Move image slightly based on scroll position
+        const yPos = (rect.top - window.innerHeight / 2) * speed;
+        imageRef.current.style.transform = `translateY(${yPos}px)`;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <section className="py-24 bg-gradient-to-br from-muted/30 to-background relative overflow-hidden">
-      {/* Background elements remain same... */}
+    <section
+      ref={sectionRef}
+      className="py-24 bg-gradient-to-br from-muted/30 to-background relative overflow-hidden"
+    >
+      {/* Background elements */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Image Column */}
-          <div className="relative order-2 lg:order-1">
+          {/* Image Column - Parallax Effect Applied Here */}
+          <div
+            ref={imageRef}
+            className="relative order-2 lg:order-1 transition-transform duration-100 ease-linear will-change-transform"
+          >
             <div className="relative group">
               <div className="relative rounded-3xl overflow-hidden shadow-3d group-hover:shadow-glow transition-all duration-500 group-hover:-translate-y-2 group-hover:rotate-1">
                 <img
@@ -30,7 +58,7 @@ export default function AboutSection() {
                 <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-transparent to-secondary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
 
-              {/* Badge 1: Focus on Innovation instead of Years */}
+              {/* Badges - They move with the image for depth */}
               <div className="absolute -top-6 -right-6 px-6 py-4 rounded-2xl bg-card border border-primary/30 shadow-3d backdrop-blur-sm animate-float">
                 <div className="flex items-center gap-2">
                   <Zap className="w-5 h-5 text-primary" />
@@ -43,7 +71,6 @@ export default function AboutSection() {
                 </div>
               </div>
 
-              {/* Badge 2: Focus on Team Strength instead of Client Count */}
               <div className="absolute -bottom-4 -left-4 w-32 h-32 rounded-full bg-gradient-to-br from-secondary/40 to-secondary/10 backdrop-blur-sm border border-secondary/30 flex items-center justify-center shadow-lg">
                 <div className="text-center">
                   <div className="flex justify-center mb-1">
@@ -58,7 +85,7 @@ export default function AboutSection() {
             </div>
           </div>
 
-          {/* Content Column */}
+          {/* Content Column - Static */}
           <div className="order-1 lg:order-2">
             <div className="inline-block px-4 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-semibold mb-4">
               WHO WE ARE
@@ -80,17 +107,8 @@ export default function AboutSection() {
 
             {/* Features list */}
             <ul className="space-y-4 mb-8">
-              {features.map((feature, index) => (
-                <li
-                  key={feature}
-                  className="flex items-start gap-3 group"
-                  style={{
-                    animation: `fade-in-left 0.5s ease-out ${
-                      index * 0.1
-                    }s forwards`,
-                    opacity: 0,
-                  }}
-                >
+              {features.map((feature) => (
+                <li key={feature} className="flex items-start gap-3 group">
                   <div className="mt-1 p-1 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors duration-300">
                     <CheckCircle2 className="w-5 h-5 text-primary" />
                   </div>
@@ -118,10 +136,6 @@ export default function AboutSection() {
         @keyframes float {
           0%, 100% { transform: translateY(0px); }
           50% { transform: translateY(-10px); }
-        }
-        @keyframes fade-in-left {
-          from { opacity: 0; transform: translateX(-20px); }
-          to { opacity: 1; transform: translateX(0); }
         }
         .animate-float { animation: float 3s ease-in-out infinite; }
         .shadow-3d { box-shadow: 0 20px 60px -15px hsl(var(--primary) / 0.3), 0 10px 20px -10px hsl(var(--primary) / 0.2); }

@@ -1,3 +1,4 @@
+// import StackingCards from "@/components/StackingCards";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import FeaturedServices from "@/components/FeaturedServices";
@@ -11,11 +12,13 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Header />
       <main>
+        {/* <StackingCards> */}
         <Hero />
         <FeaturedServices />
         <AboutSection />
         <Achievements />
         <Certifications />
+        {/* </StackingCards> */}
       </main>
       <Footer />
     </div>

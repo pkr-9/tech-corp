@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Monitor,
@@ -6,6 +7,7 @@ import {
   BrainCircuit,
   ArrowRight,
 } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const services = [
   {
@@ -43,14 +45,43 @@ const services = [
 ];
 
 export default function FeaturedServices() {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect(); // Only animate once
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="py-24 bg-background relative overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="py-24 bg-background relative overflow-hidden"
+    >
       {/* Background decoration */}
       <div className="absolute inset-0 bg-grid-pattern opacity-5" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        {/* Section Header - Fades in first */}
+        <div
+          className={cn(
+            "text-center max-w-3xl mx-auto mb-16 transition-all duration-700 transform",
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          )}
+        >
           <div className="inline-block px-4 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-semibold mb-4">
             OUR SERVICES
           </div>
@@ -63,7 +94,7 @@ export default function FeaturedServices() {
           </p>
         </div>
 
-        {/* Services Grid */}
+        {/* Services Grid - Staggered Animation */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
           {services.map((service, index) => {
             const Icon = service.icon;
@@ -71,16 +102,15 @@ export default function FeaturedServices() {
               <Link
                 to={service.href}
                 key={service.title}
-                className="block h-full"
+                className={cn(
+                  "block h-full transition-all duration-700 transform",
+                  isVisible
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-20"
+                )}
+                style={{ transitionDelay: `${index * 150}ms` }} // Stagger delay
               >
-                <div
-                  key={service.title}
-                  className="group relative p-8 rounded-3xl bg-card border border-border hover:border-primary/50 transition-all duration-500 hover:shadow-3d hover:-translate-y-2 cursor-pointer"
-                  style={{
-                    animation: `fade-in 0.6s ease-out ${index * 0.1}s forwards`,
-                    opacity: 0,
-                  }}
-                >
+                <div className="group relative p-8 rounded-3xl bg-card border border-border hover:border-primary/50 transition-all duration-500 hover:shadow-3d hover:-translate-y-2 cursor-pointer h-full overflow-hidden">
                   {/* Gradient background on hover */}
                   <div
                     className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-5 rounded-3xl transition-opacity duration-500`}
@@ -104,7 +134,6 @@ export default function FeaturedServices() {
                       {service.description}
                     </p>
 
-                    {/* Learn more link */}
                     <div className="flex items-center gap-2 text-primary font-semibold group-hover:gap-4 transition-all duration-300">
                       <span>Learn more</span>
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
@@ -121,31 +150,14 @@ export default function FeaturedServices() {
       </div>
 
       <style>{`
-        @keyframes fade-in {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
         .bg-grid-pattern {
           background-image: 
             linear-gradient(to right, hsl(var(--border)) 1px, transparent 1px),
             linear-gradient(to bottom, hsl(var(--border)) 1px, transparent 1px);
           background-size: 40px 40px;
         }
-        
-        .shadow-3d {
-          box-shadow: 0 20px 60px -15px hsl(var(--primary) / 0.3), 0 10px 20px -10px hsl(var(--primary) / 0.2);
-        }
-        
-        .shadow-glow {
-          box-shadow: 0 0 40px hsl(var(--primary) / 0.4);
-        }
+        .shadow-3d { box-shadow: 0 20px 60px -15px hsl(var(--primary) / 0.3), 0 10px 20px -10px hsl(var(--primary) / 0.2); }
+        .shadow-glow { box-shadow: 0 0 40px hsl(var(--primary) / 0.4); }
       `}</style>
     </section>
   );
