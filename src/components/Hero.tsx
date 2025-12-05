@@ -32,7 +32,7 @@ export default function Hero() {
         <div className="absolute top-0 left-0 right-0 h-[500px] bg-gradient-to-b from-primary/5 via-transparent to-transparent blur-3xl" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 py-16">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8 py-10 pt-5">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* col 1  */}
           <div className="text-center lg:text-left">
@@ -94,7 +94,7 @@ export default function Hero() {
 
           {/* col 2  - 3D Code Card with Parallax */}
           <div
-            className="relative relative w-full mx-auto max-w-5xl animate-fade-in-up transform-gpu will-change-transform"
+            className="relative w-full mx-auto max-w-5xl animate-fade-in-up transform-gpu will-change-transform"
             style={{
               animationDelay: "0.5s",
               transform:
