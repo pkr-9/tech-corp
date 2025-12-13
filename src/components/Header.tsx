@@ -77,7 +77,7 @@ export default function Header() {
                 </Button>
               </Link>
 
-              <button
+              {/* <button
                 onClick={toggleDark}
                 aria-label="Toggle dark mode"
                 className="p-2 rounded-lg hover:bg-muted/50 transition-colors"
@@ -87,7 +87,7 @@ export default function Header() {
                 ) : (
                   <Moon className="w-5 h-5 text-foreground" />
                 )}
-              </button>
+              </button> */}
 
               <Link to="/contact">
                 <Button className="hidden sm:inline-flex bg-primary text-primary-foreground shadow-3d hover:shadow-glow">

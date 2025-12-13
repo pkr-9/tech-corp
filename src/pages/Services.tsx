@@ -1,10 +1,19 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import Header from "@/components/Header";
 import PageHeader from "@/components/PageHeader";
 import Footer from "@/components/Footer";
 import BrowseByCategory from "@/components/BrowseByCategory";
 import BrowseByIndustry from "@/components/BrowseByIndustry";
 import FeaturedServicesCarousel from "@/components/FeaturedServicesCarousel";
-import ServiceCard, { ServiceCardProps } from "@/components/ServiceCard";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import {
   Monitor,
   Smartphone,
@@ -12,10 +21,11 @@ import {
   BrainCircuit,
   ShieldCheck,
   GitBranch,
+  ArrowRight,
 } from "lucide-react";
 
-// Dummy data for the services grid, using the ServiceCardProps interface
-const DUMMY_SERVICES: ServiceCardProps[] = [
+// Expanded Service List for Grid with Images
+const SERVICES = [
   {
     title: "Web Development",
     description:
@@ -24,6 +34,8 @@ const DUMMY_SERVICES: ServiceCardProps[] = [
     category: "Development",
     industry: "Tech",
     Icon: Monitor,
+    image:
+      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=800&auto=format&fit=crop",
   },
   {
     title: "Mobile Development",
@@ -33,6 +45,8 @@ const DUMMY_SERVICES: ServiceCardProps[] = [
     category: "Development",
     industry: "Mobile",
     Icon: Smartphone,
+    image:
+      "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=800&auto=format&fit=crop",
   },
   {
     title: "Cloud & DevOps",
@@ -42,6 +56,8 @@ const DUMMY_SERVICES: ServiceCardProps[] = [
     category: "Infrastructure",
     industry: "SaaS",
     Icon: Cloud,
+    image:
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop",
   },
   {
     title: "AI & Machine Learning",
@@ -51,6 +67,8 @@ const DUMMY_SERVICES: ServiceCardProps[] = [
     category: "Data",
     industry: "Analytics",
     Icon: BrainCircuit,
+    image:
+      "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=800&auto=format&fit=crop",
   },
   {
     title: "QA & Testing",
@@ -60,6 +78,7 @@ const DUMMY_SERVICES: ServiceCardProps[] = [
     category: "Quality",
     industry: "All",
     Icon: ShieldCheck,
+    image: "/services/testing.jpg",
   },
   {
     title: "UX/UI Design",
@@ -68,21 +87,39 @@ const DUMMY_SERVICES: ServiceCardProps[] = [
     href: "/services/ux-ui-design",
     category: "Design",
     industry: "All",
-    Icon: GitBranch, // Placeholder icon
+    Icon: GitBranch,
+    image:
+      "https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=800&auto=format&fit=crop",
   },
 ];
 
+// Define Categories for Filter
+const CATEGORIES = [
+  "All",
+  "Development",
+  "Infrastructure",
+  "Data",
+  "Quality",
+  "Design",
+];
+
 export default function ServicesPage() {
+  const [activeCategory, setActiveCategory] = useState("All");
+
+  // Filter Logic
+  const filteredServices =
+    activeCategory === "All"
+      ? SERVICES
+      : SERVICES.filter((s) => s.category === activeCategory);
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
       <main>
-        {/* Item 1: Hero */}
         <PageHeader
           title="Our Services"
           subtitle="From concept to deployment, we provide end-to-end technology services to build, launch, and scale your vision."
         >
-          {/* You can add your Primary CTA here */}
           <div className="mt-6">
             <a
               href="/contact"
@@ -93,36 +130,109 @@ export default function ServicesPage() {
           </div>
         </PageHeader>
 
-        {/* <BrowseByCategory /> */}
-        <FeaturedServicesCarousel />
+        <BrowseByCategory />
         <BrowseByIndustry />
-        {/* This section will hold your filter bar (Item 2) and service grid (Item 5) */}
-        <section className="py-10">
+        <FeaturedServicesCarousel />
+
+        {/* Service Grid with Filter */}
+        <section className="py-24" id="service-grid">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            {/* Item 2: Filter Bar (Placeholder) */}
-            {/* Section Header */}
-            <div className="text-center max-w-3xl mx-auto mb-16">
-              <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">
-                Browse by Category
-              </h2>
-              <p className="text-lg text-muted-foreground">
-                Find the exact solution you need by exploring our core service
-                categories.
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold mb-4">Explore All Services</h2>
+              <p className="text-muted-foreground">
+                Filter by category to find exactly what you need.
               </p>
             </div>
 
-            {/* Item 5: Services Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {DUMMY_SERVICES.map((service) => (
-                <ServiceCard key={service.title} {...service} />
-              ))}
+            {/* Filter Tabs */}
+            <div className="flex justify-center mb-12 overflow-x-auto pb-4">
+              <Tabs
+                defaultValue="All"
+                className="w-full max-w-3xl"
+                onValueChange={setActiveCategory}
+              >
+                <TabsList className="w-full grid grid-cols-3 sm:grid-cols-6 h-auto p-1 bg-muted/50">
+                  {CATEGORIES.map((cat) => (
+                    <TabsTrigger
+                      key={cat}
+                      value={cat}
+                      className="text-xs sm:text-sm px-2 py-2"
+                    >
+                      {cat}
+                    </TabsTrigger>
+                  ))}
+                </TabsList>
+              </Tabs>
             </div>
 
-            {/* Items 6 & 7 (Why Choose Us / Footer CTA) would go here */}
+            {/* Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 min-h-[400px]">
+              {filteredServices.length > 0 ? (
+                filteredServices.map((service, index) => {
+                  const Icon = service.Icon;
+                  return (
+                    <Link
+                      to={service.href}
+                      key={service.title}
+                      className="service-card-fade-in group block h-full"
+                      style={{
+                        animationDelay: `${index * 0.1}s`,
+                        animationFillMode: "both",
+                      }}
+                    >
+                      <Card className="h-full overflow-hidden border-border hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex flex-col">
+                        <div className="relative h-48 overflow-hidden bg-muted">
+                          <img
+                            src={service.image}
+                            alt={service.title}
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60" />
+                          <div className="absolute top-4 left-4 p-2 rounded-lg bg-background/90 backdrop-blur-sm shadow-sm">
+                            <Icon className="w-5 h-5 text-primary" />
+                          </div>
+                        </div>
+
+                        <CardHeader>
+                          <h3 className="text-xl font-bold group-hover:text-primary transition-colors">
+                            {service.title}
+                          </h3>
+                        </CardHeader>
+
+                        <CardContent className="flex-grow">
+                          <p className="text-muted-foreground text-sm leading-relaxed">
+                            {service.description}
+                          </p>
+                        </CardContent>
+
+                        <CardFooter className="border-t pt-4">
+                          <div className="flex items-center text-sm font-medium text-primary group-hover:gap-2 transition-all">
+                            Learn more <ArrowRight className="ml-1 w-4 h-4" />
+                          </div>
+                        </CardFooter>
+                      </Card>
+                    </Link>
+                  );
+                })
+              ) : (
+                <div className="col-span-full text-center py-20 text-muted-foreground">
+                  No services found in this category.
+                </div>
+              )}
+            </div>
           </div>
         </section>
       </main>
       <Footer />
+      <style>{`
+        @keyframes service-fade-in {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .service-card-fade-in {
+          animation: service-fade-in 0.5s ease-out forwards;
+        }
+      `}</style>
     </div>
   );
 }
